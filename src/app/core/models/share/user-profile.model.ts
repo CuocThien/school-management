@@ -1,3 +1,7 @@
+import { City } from './city.model';
+import { District } from './district.model';
+import { LaundryPackage } from './laundry-package.model';
+
 export class UserProfile {
   accountId?: number;
   rank: string;
@@ -47,6 +51,9 @@ export class UserProfile {
   permissions?: string[];
   systemPermissions?: string[];
   address?: string;
+  cityDetail?: City;
+  districtDetail?: District;
+  paymentPlanDetail?: LaundryPackage[];
   memberContract?: any;
   statusContract?: string;
   idCardImage?: string;

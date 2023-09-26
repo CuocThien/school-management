@@ -8,6 +8,7 @@ export const UrlConstant = {
       CHANGE_PASSWORD: '/auth/change-password',
     },
     MAIN: {
+      NEWS: '/news',
       DASHBOARD: '/dashboard',
       REPORT: 'reports',
       CLUB_MEMBERS: 'club-members',

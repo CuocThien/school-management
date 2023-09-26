@@ -18,6 +18,7 @@ import { ErrorServerInterceptor } from './core/middlewares/error-server.intercep
 import { JwtInterceptor } from './core/middlewares/jwt.interceptor';
 import { LayoutsModule } from './layouts/layouts.module';
 import { ExtrapagesModule } from './pages/extrapages/extrapages.module';
+import { DashboardsModule } from './pages/main/dashboards/dashboards.module';
 import { ImageDetailComponent } from './shared/image-detail/image-detail.component';
 
 export function createTranslateLoader(http: HttpClient): any {
@@ -58,6 +59,7 @@ export const pluginsModules = [
     AppRoutingModule,
     LayoutsModule,
     ExtrapagesModule,
+    DashboardsModule,
     CoreModule,
     pluginsModules,
   ],

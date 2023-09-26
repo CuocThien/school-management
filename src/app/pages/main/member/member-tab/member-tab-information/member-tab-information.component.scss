@@ -1,0 +1,54 @@
+//RESPONSIVE
+$DESKTOP: 1440px;
+$IPADPRO: 1366px;
+$IPAD: 1023px;
+$PHONE: 767px;
+
+
+@mixin Responsive($canvas) {
+  @if $canvas ==PHONE {
+    @media only screen and (max-width: $PHONE) {
+      @content;
+    }
+  }
+
+  @else if $canvas ==IPAD {
+    @media only screen and (max-width: $IPAD) {
+      @content;
+    }
+  }
+
+  @else if $canvas ==IPADPRO {
+    @media only screen and (max-width: $IPADPRO) {
+      @content;
+    }
+  }
+
+  @else if $canvas ==DESKTOP {
+    @media only screen and (min-width: $DESKTOP) {
+      @content;
+    }
+  }
+}
+
+.text-width {
+  @include Responsive(DESKTOP) {
+    width: 180px;
+    margin-right: 30px;
+  }
+
+  @include Responsive(IPADPRO) {
+    width: 160px;
+    margin-right: 30px;
+  }
+
+  @include Responsive(IPAD) {
+    width: auto;
+    margin-right: 30px;
+  }
+
+  @include Responsive(PHONE) {
+    width: auto;
+    margin-right: 30px;
+  }
+}

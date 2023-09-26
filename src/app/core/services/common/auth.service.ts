@@ -11,7 +11,7 @@ import { SystemConstant } from '../../constants/system.constant';
 import { UrlConstant } from '../../constants/url.constant';
 import { User } from '../../models/common/auth.model';
 import { UserProfile } from '../../models/share/user-profile.model';
-import * as querystring from 'querystring-es3';
+import * as querystring from 'querystring';
 
 @Injectable({ providedIn: 'root' })
 
@@ -59,7 +59,7 @@ export class AuthenticationService {
       }
       this.alert.success(LanguageConstant[currentLang].LOGIN.SUCCESS);
       localStorage.setItem(SystemConstant.USER_PROFILE, JSON.stringify(res.data));
-      this.router.navigateByUrl(UrlConstant.ROUTE.MAIN.DASHBOARD);
+      this.router.navigateByUrl(UrlConstant.ROUTE.MAIN.NEWS);
     });
   }
 

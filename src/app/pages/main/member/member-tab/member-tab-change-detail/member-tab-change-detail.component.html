@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title mb-3 text-uppercase card-border-title">
+      Change Log Detail
+    </div>
+    <div class="row">
+      <div class="col-3 ">
+        <div class=" card-border-1x text-capitalize font-size-14 mt-2 pt-2 pb-2"
+          style="border-right: 0.5px solid #f3f1f1;" *ngFor="let item of listKeyName">
+          {{ item }}:
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="card-border-1x font-size-14 mt-2 p-2" *ngFor="let item of listKeyValue"
+          style="border-left: 0.5px solid #f3f1f1;min-height: 38px;">
+          {{item}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,16 +11,20 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgxEchartsModule } from 'ngx-echarts';
 import { pagesRoutes } from './pages-routing.module';
 
 export const pluginsModules = [
   NgbDropdownModule,
   NgbModalModule,
+  NgApexchartsModule,
   NgbNavModule,
   NgbTooltipModule,
   NgbCollapseModule,
   TranslateModule,
   NgSelectModule,
+  NgxEchartsModule
 ];
 @NgModule({
   declarations: [],

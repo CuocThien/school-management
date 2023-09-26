@@ -1,0 +1,71 @@
+<div class="row mt-4">
+  <!-- Status Contract -->
+  <div class="col-xl-4 col-lg-12 col-md-12 col-12">
+    <div class="row">
+      <!-- Payment Plan -->
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body p-0 p-lg-2">
+            <div class="row">
+              <div class="col-12">
+                <ul class="list-unstyled mb-0">
+                  <li class="d-flex justify-content-between align-items-center card-border-1x m-3 mt-4 mb-4">
+                    <h6 class="font-size-14"><i class="fas fa-trophy mr-10 w-20 icon-color-orange"></i>{{
+                      'USER_INFO.RANK' |
+                      translate }}</h6>
+                    <h6 class="font-size-14">
+                      {{ userMemberInfo?.rank}}
+                    </h6>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center card-border-1x m-3 mt-4 mb-4">
+                    <h6 class="font-size-14"><i class="fas fa-star mr-10 w-20 icon-color-orange"></i>{{
+                      'USER_INFO.STAR'
+                      | translate }}</h6>
+                    <h6 class="font-size-14">
+                      {{ userMemberInfo?.star}}
+                    </h6>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center card-border-1x m-3 mt-4 mb-4">
+                    <h6 class="font-size-14"><i class="fas fa-user mr-10 w-20 icon-color-orange"></i>{{
+                      'USER_INFO.MEMBER_TYPE' |
+                      translate }}</h6>
+                    <h6 class="font-size-14">{{ userMemberInfo?.memberType}}</h6>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- UserInfo -->
+  <div class="col-xl-8 col-lg-12 col-md-12">
+    <app-user-info-details [userMemberInfo]="userMemberInfo" [toggleClubs]="toggleClubs" [typeProfile]="'MEMBER'">
+      (toggleClubsHide)="toggleClubs = $event"
+      (toggle)="openSelectBox=$event"
+    </app-user-info-details>
+
+    <div class="col-12 text-right">
+      <ng-template [ngxPermissionsOnly]="'D_ACCOUNT'">
+        <div *ngIf="!isDeletedUser">
+          <button type="button"
+            class="btn btn-danger btn-lg text-uppercase mt-1 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0 btn-shadow text-overflow"
+            (click)="banAccount()">
+            {{ 'BUTTON.BAN_ACCOUNT' | translate }}
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template [ngxPermissionsOnly]="'PU_ACCOUNT'">
+        <div *ngIf="isDeletedUser">
+          <button type="button"
+            class="btn btn-primary btn-lg text-uppercase mt-1 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0 btn-shadow text-overflow"
+            (click)="banAccount()">
+            {{ 'BUTTON.OPEN_ACCOUNT' | translate }}
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import MetisMenu from 'metismenujs';
+import MetisMenu from 'metismenujs/dist/metismenujs';
 import { AuthenticationService } from 'src/app/core/services/common/auth.service';
 
 import { MenuItem } from '../../core/models/common/menu.model';

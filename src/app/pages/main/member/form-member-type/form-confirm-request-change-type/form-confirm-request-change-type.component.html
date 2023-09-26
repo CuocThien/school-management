@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-body font-size-15">
+    <h4 class="card-title text-uppercase card-border-title">{{ 'FORM.CONFIRM_REQUEST_CHANGE_MEMBER_TYPE' | translate }}
+    </h4>
+    <form [formGroup]="form">
+      <div class="row">
+
+
+        <!-- Image Upload -->
+        <div class="col-12">
+          <div class="mb-3">
+            <label for="">{{"TABLE.IMAGE" | translate}}: </label><br>
+            <dropzone [config]="config" [message]="'FORM.CLICK_OR_DRAG_IMAGE_TO_UPLOAD' | translate"
+              (init)="dropzoneInit($event)">
+            </dropzone>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="col-12 mt-2">
+        <label for=""><span class="font-size-16">{{"TABLE.STATUS" | translate}}:</span></label>
+        <ng-select class="mt-1" formControlName="status" [placeholder]="'SELECTBOX.STATUS' | translate"
+          (change)="changeStatus($event)">
+          <ng-option *ngFor="let item of listStatus" [value]="item.value">
+            {{ translate.currentLang === 'en' ? item.nameEn : item.nameVi }}
+          </ng-option>
+        </ng-select>
+      </div>
+      <br>
+      <!-- Reason for rejection -->
+      <div class="col-12 mt-2">
+        <label for=""><span class="font-size-16">{{"TABLE.REJECT_REASON" | translate}}:</span></label>
+        <input type="text" class="form-control" formControlName="rejectReason"
+          [placeholder]="'PLACEHOLDER.REJECT_REASON'|translate">
+      </div>
+
+      <!-- Footer -->
+      <div class="d-flex flex-wrap gap-2 mt-5 justify-content-center">
+        <button type="reset" class="btn btn-danger waves-effect text-uppercase font-w600 btn-shadow"
+          (click)="onCancel()">
+          {{ 'BUTTON.CANCEL' | translate }}
+        </button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase font-w600 btn-shadow"
+          (click)="onSubmit()">
+          {{ 'BUTTON.SUBMIT' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
