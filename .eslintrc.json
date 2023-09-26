@@ -3,6 +3,7 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "parser": "@typescript-eslint/parser",
   "overrides": [
     {
       "files": [
@@ -10,7 +11,7 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json",
+          "./tsconfig.json",
           "e2e/tsconfig.json"
         ],
         "createDefaultProgram": true

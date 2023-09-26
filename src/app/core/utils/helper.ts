@@ -80,7 +80,7 @@ const getListMonthYear = () => {
 
 // Get Trans Language By Key
 const transLang = (key: string) => {
-  const currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+  const currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
   return get(LanguageConstant[currentLang], key);
 };
 

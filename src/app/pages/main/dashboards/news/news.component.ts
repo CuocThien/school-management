@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { isNil, omitBy } from 'lodash';
 import * as moment from 'moment';
@@ -7,6 +8,10 @@ import { SystemConstant } from 'src/app/core/constants/system.constant';
 import { Query } from 'src/app/core/models/share/query.model';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { getPage } from 'src/app/core/utils';
+import { FormAddEditNewsComponent } from './form-news/form-add-edit-news/form-add-edit-news.component';
+import { FormConfirmBoxComponent } from 'src/app/shared/forms/form-confirm-box/form-confirm-box.component';
+import { ToastrService } from 'ngx-toastr';
+import { ViewDetailNotificationComponent } from './form-news/view-detail-notification/view-detail-notification.component';
 
 @Component({
   selector: 'app-news',
@@ -50,19 +55,21 @@ export class NewsComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private newsSv: NotificationService,
+    private modalSvc: NgbModal,
+    private alert: ToastrService,
     public translate: TranslateService,
   ) {
   }
 
   async ngOnInit() {
-    this.getListNotification();
+    this._getListNotification();
   }
 
 
   public onChangePage(page: number) {
     if (page) {
       this.page = page;
-      this.getListNotification();
+      this._getListNotification();
     }
   }
 
@@ -76,8 +83,8 @@ export class NewsComponent implements OnInit {
     // this.getListNotification();
   }
 
-  public getListNotification(options: Query = {}) {
-    // this.spinner.show();
+  private _getListNotification(options: Query = {}) {
+    this.spinner.show();
     options = {
       order: 'DESC',
       page: this.page,
@@ -89,6 +96,65 @@ export class NewsComponent implements OnInit {
       this.listNotification = res.data.result;
       this.spinner.hide();
     }, () => this.spinner.hide());
+  }
+
+  public addNotification() {
+    const modalRef = this.modalSvc.open(FormAddEditNewsComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: true,
+    });
+    modalRef.componentInstance.action = SystemConstant.ACTION.CREATE;
+    modalRef.componentInstance.closeModal.subscribe((res) => {
+      return res ? this._getListNotification() : {};
+    });
+  }
+
+  public updateNotification(notification: any) {
+    const modalRef = this.modalSvc.open(FormAddEditNewsComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: true,
+    });
+    modalRef.componentInstance.action = SystemConstant.ACTION.EDIT;
+    modalRef.componentInstance.notification = notification;
+    modalRef.componentInstance.closeModal.subscribe((res) => {
+      return res ? this._getListNotification() : {};
+    });
+  }
+
+  public deleteNotification(notification: any) {
+    const modalRef = this.modalSvc.open(
+      FormConfirmBoxComponent, {
+        centered: true,
+        size: 'md',
+        backdrop: true,
+      });
+    modalRef.componentInstance.title = 'FORM.DELETE_NOTIFICATION';
+    modalRef.componentInstance.closeModal.subscribe((res) => {
+      return res ? this._deleteNotification(notification.id) : {};
+    });
+  }
+
+  private _deleteNotification(supplierId: string) {
+    this.spinner.show();
+    this.newsSv.deleteNotification(supplierId)
+      .subscribe((res: any) => {
+        if (res) {
+          this.alert.success(this.translate.instant('FORM.DELETE_SUCCESS'));
+          this._getListNotification();
+          this.spinner.hide();
+        }
+      }, () => this.spinner.hide());
+  }
+
+  public viewNotificationDetail(value: any) {
+    const modalRef = this.modalSvc.open(ViewDetailNotificationComponent, {
+      centered: true,
+      size: 'lg',
+      backdrop: true,
+    });
+    modalRef.componentInstance.notification = value;
   }
 
 }

@@ -19,4 +19,16 @@ export class NotificationService {
     return this.http.get<[]>(this.API_URL + '/notifications?' + options);
   }
 
+  public createNotification(body: any): Observable<[]> {
+    return this.http.post<[]>(this.API_URL + '/notification', body);
+  }
+
+  public updateNotification(id: string, body): Observable<[]> {
+    return this.http.put<[]>(this.API_URL + `/notification/${id}`, body);
+  }
+
+  public deleteNotification(id: string): Observable<[]> {
+    return this.http.delete<[]>(this.API_URL + `/notification/${id}`);
+  }
+
 }

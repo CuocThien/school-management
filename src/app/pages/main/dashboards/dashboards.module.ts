@@ -13,6 +13,8 @@ import { SkeletonLoaderModule } from 'src/app/shared/skeleton-loader/skeleton-lo
 import { WidgetModule } from 'src/app/shared/widget/widget.module';
 import { NewsComponent } from './news/news.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { FormAddEditNewsComponent } from './news/form-news/form-add-edit-news/form-add-edit-news.component';
+import { ViewDetailNotificationComponent } from './news/form-news/view-detail-notification/view-detail-notification.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -38,6 +40,8 @@ export const pluginsModules = [
 @NgModule({
   declarations: [
     NewsComponent,
+    FormAddEditNewsComponent,
+    ViewDetailNotificationComponent,
   ],
   imports: [
     CommonModule,

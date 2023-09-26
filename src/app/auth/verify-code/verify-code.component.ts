@@ -19,7 +19,7 @@ export class VerifyCodeComponent implements OnInit {
   code: string;
   isVerified = false;
   // Language
-  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
   // 
   constructor(
     private route: ActivatedRoute,

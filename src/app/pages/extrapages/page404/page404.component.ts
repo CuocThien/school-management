@@ -12,7 +12,7 @@ import { SystemConstant } from 'src/app/core/constants/system.constant';
 
 export class Page404Component implements OnInit {
   languageConstant = LanguageConstant;
-  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
   // 
   constructor(
     public translate: TranslateService,

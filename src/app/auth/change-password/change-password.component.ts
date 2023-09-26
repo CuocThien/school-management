@@ -29,7 +29,7 @@ export class ChangePasswordComponent implements OnInit {
   isPassRequire2 = false;
   isPassRequire3 = false;
   // Language
-  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+  currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
   isForgotPassword = false
   constructor(
     public languageSvc: LanguageService,

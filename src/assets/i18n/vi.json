@@ -200,7 +200,9 @@
     "LONGITUDE": "Kinh độ...",
     "COUPON_CODE": "Nhập mã khuyến mãi",
     "COUPON_NAME_EN": "Nhập tên khuyến mãi tiếng Anh",
-    "COUPON_NAME_VI": "Nhập tên khuyến mãi tiếng Việt"
+    "COUPON_NAME_VI": "Nhập tên khuyến mãi tiếng Việt",
+    "TITLE": "Nhập tiêu đề...",
+    "CONTENT": "Nhập nội dung..."
   },
   "DATA": {
     "DASHBOARDS": {
@@ -648,7 +650,8 @@
     "IS_APPLY_ALL_PACKAGE": "Áp dụng cho tất cả gói giặt",
     "COUPON_CODE": "Mã khuyến mãi",
     "COUPON_NAME_EN": "Tên khuyến mãi tiếng Anh",
-    "COUPON_NAME_VI": "Tên khuyến mãi tiếng Việt"
+    "COUPON_NAME_VI": "Tên khuyến mãi tiếng Việt",
+    "TARGET_TYPE": "Gửi thông báo đến"
   },
   "GENDER": {
     "MALE": "Nam",
@@ -925,6 +928,10 @@
     "CREATE_ROLE": "Thêm vai trò",
     "EDIT_ROLE": "Chỉnh sửa vai trò",
     "CONFIRM_DELETE_ROLE": "Bạn có muốn xoá vai trò này không?",
-    "ADD_NEW_ORDER": "Tạo đơn mới"
+    "ADD_NEW_ORDER": "Tạo đơn mới",
+    "CREATE_NOTIFICATION": "Tạo thông báo",
+    "EDIT_NOTIFICATION": "Chỉnh sửa thông báo",
+    "DELETE_NOTIFICATION": "Xoá thông báo",
+    "DETAIL_NOTIFICATION": "Chi tiết thông báo"
   }
 }

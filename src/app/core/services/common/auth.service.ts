@@ -51,7 +51,7 @@ export class AuthenticationService {
     this.http.get(this.API_URL + '/auth/profile', httpOptions).subscribe((res: any) => {
       const permissions = res.data.permissions.concat(res.data.systemPermissions);
       this.permissionsService.loadPermissions(permissions); //Load Permission
-      const currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+      const currentLang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
       if (!permissions.includes(SystemConstant.SYSTEM_PERMISSIONS.CRM)) {
         this.spinner.hide();
         this.alert.error(LanguageConstant[currentLang].ERROR.ER_403);
@@ -78,7 +78,7 @@ export class AuthenticationService {
   }
 
   public logout() {
-    const lang = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+    const lang = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
     localStorage.clear();
     localStorage.setItem(SystemConstant.LANGUAGE, lang);
     this.router.navigate([UrlConstant.ROUTE.AUTH.LOGIN]);

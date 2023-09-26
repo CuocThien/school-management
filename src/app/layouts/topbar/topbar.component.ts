@@ -48,7 +48,7 @@ export class TopbarComponent implements OnInit {
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
-    this.langValue = localStorage.getItem(SystemConstant.LANGUAGE) || 'en';
+    this.langValue = localStorage.getItem(SystemConstant.LANGUAGE) || 'vi';
     const val = this.listLang.filter(x => x.lang === this.langValue);
     this.countryName = val.map(element => element.text);
     if (val.length === 0) {
