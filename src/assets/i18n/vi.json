@@ -142,7 +142,9 @@
     "RENEW_STATUS": "Chọn trạng thái...",
     "PAYMENT_STATUS": "Chọn trạng thái thanh toán...",
     "SERVICE_STATUS": "Chọn trạng thái đơn hàng...",
-    "DELIVERY_METHOD": "Chọn phương thức vận chuyển ..."
+    "DELIVERY_METHOD": "Chọn phương thức vận chuyển ...",
+    "GRADE": "Chọn khối...",
+    "GENDER": "Chọn giới tính..."
   },
   "PLACEHOLDER": {
     "INPUT_SESSION_NUMBER": "Nhập số buổi tập",
@@ -379,7 +381,10 @@
     "TNG_SCHEDULE_CHARGE": "Lịch thanh toán TNG",
     "FREEZE": "Bảo lưu",
     "TNG_PAY_HISTORY": "Lịch sử TNG PAY",
-    "SUBSCRIPTION": "SUBSCRIPTION"
+    "SUBSCRIPTION": "SUBSCRIPTION",
+    "CLASSIFICATION": "Xếp loại",
+    "DETAIL": "Thông tin cá nhân",
+    "STUDY_PROCESS": "Quá trình học tập"
   },
   "TABLE": {
     "STORE": "Cửa hàng",
@@ -651,7 +656,8 @@
     "COUPON_CODE": "Mã khuyến mãi",
     "COUPON_NAME_EN": "Tên khuyến mãi tiếng Anh",
     "COUPON_NAME_VI": "Tên khuyến mãi tiếng Việt",
-    "TARGET_TYPE": "Gửi thông báo đến"
+    "TARGET_TYPE": "Gửi thông báo đến",
+    "FORM_TEACHER": "GVCN"
   },
   "GENDER": {
     "MALE": "Nam",
@@ -716,7 +722,13 @@
     "DELETED_AT": "Xóa vào ngày",
     "ACTIVE": "Kích hoạt",
     "GROUP_NAME": "Tên nhóm",
-    "MEMBER_TYPE": "Loại tài khoản khách hàng"
+    "MEMBER_TYPE": "Loại tài khoản khách hàng",
+    "CLASS": "Lớp",
+    "POSITION": "Chức vụ",
+    "BIRTHPLACE": "Nơi sinh",
+    "RELIGION": "Tôn giáo",
+    "JOIN_CYU_AT": "Ngày vào Đoàn",
+    "JOIN_CP_AT": "Ngày vào Đảng"
   },
   "BUTTON": {
     "USER_USED_PROMOTION": "User Used Promotion",

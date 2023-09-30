@@ -10,6 +10,7 @@ export const UrlConstant = {
     MAIN: {
       NEWS: '/news',
       DASHBOARD: '/dashboard',
+      STUDENT: '/students',
       REPORT: 'reports',
       CLUB_MEMBERS: 'club-members',
       EMPLOYEES_LIST_GM: 'employees/list-gm',

@@ -60,4 +60,6 @@ export class Query {
   paymentStatus?: string;
   deliveryMethodId?: number;
   laundryPackageId?: string;
+  gradeId?: number;
+  gender?: number;
 }

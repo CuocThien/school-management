@@ -59,11 +59,21 @@ export class AuthenticationService {
       }
       this.alert.success(LanguageConstant[currentLang].LOGIN.SUCCESS);
       localStorage.setItem(SystemConstant.USER_PROFILE, JSON.stringify(res.data));
+      localStorage.setItem(SystemConstant.ACCOUNT_TYPE, res.data.accountType);
       this.router.navigateByUrl(UrlConstant.ROUTE.MAIN.NEWS);
     });
   }
 
   public checkSystemPermissions(): boolean {
+    const userInfo = this.getUserProfileLocal();
+    if (!userInfo.systemPermissions.includes(SystemConstant.SYSTEM_PERMISSIONS.CRM)) {
+      this.router.navigateByUrl(UrlConstant.ROUTE.AUTH.LOGIN);
+      return false;
+    }
+    return true;
+  }
+
+  public checkAccountTypePermission(): boolean {
     const userInfo = this.getUserProfileLocal();
     if (!userInfo.systemPermissions.includes(SystemConstant.SYSTEM_PERMISSIONS.CRM)) {
       this.router.navigateByUrl(UrlConstant.ROUTE.AUTH.LOGIN);
@@ -86,6 +96,10 @@ export class AuthenticationService {
 
   public getAccessToken() {
     return localStorage.getItem(SystemConstant.ACCESS_TOKEN) || null;
+  }
+
+  public getAccountType() {
+    return localStorage.getItem(SystemConstant.ACCOUNT_TYPE) || null;
   }
 
   public getRefToken() {

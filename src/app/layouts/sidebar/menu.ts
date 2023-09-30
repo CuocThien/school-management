@@ -21,17 +21,17 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         label: 'Hồ Sơ Học Sinh',
-        link: '/club-members',
+        link: '/students',
         permission: ['F_MEMBER'],
       },
       {
         label: 'Đánh Giá Môn Học',
-        link: '/change-member-type',
+        link: '/',
         permission: ['F_MEMBER'],
       },
       {
         label: 'Xếp Loại Hạnh Kiểm',
-        link: '/account-change-log',
+        link: '/',
         permission: ['G_LISTCHANGES']
       }
     ],

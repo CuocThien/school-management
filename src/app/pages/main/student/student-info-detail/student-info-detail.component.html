@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-body h-vh100">
+    <h4 class="card-title mb-4 text-uppercase card-border-title cursor-pointer" routerLink=".."><i
+        class="fas fa-arrow-circle-left mr-10"></i>{{
+      'GO_BACK.TITLE' | translate }}</h4>
+    <!-- CardUser -->
+    <div class="row">
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card overflow-hidden">
+          <div class="card-body pt-0">
+            <div class="row flex justify-content-center">
+              <div class="col-4 mt-2 flex flex-column align-items-center">
+                <div class="profile-user-wid mt-3 text-center">
+                  <div class="avatar-img" [ngClass]="avatarColor" (click)="openImage(avatarUser,'ava')"
+                    style="background:url('{{ avatarUser }}')">
+                  </div>
+                </div>
+                <h5 class="mt-3 text-capitalize text-overflow text-wrap text-center">{{
+                  studentInfo?.parseStatus}}</h5>
+              </div>
+              <div class="col-sm-8">
+                <div class="pt-4">
+                  <ul class="list-unstyled mb-0 font-w500">
+                    <li class="d-flex justify-content-between align-items-center card-border-1x">
+                      <h5 class="font-size-bold">{{ studentInfo?.fullName}}</h5>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                      <p class="mb-0">{{ 'USER_INFO.CLASS' | translate }}:</p>
+                      <span>{{studentInfo?.className}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                      <p class="mb-0">{{ 'USER_INFO.POSITION' | translate }}:</p>
+                      <span>{{studentInfo?.position}}</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                      <p class="mb-0">{{ 'USER_INFO.PHONE' | translate }}: </p>
+                      <span>{{ studentInfo?.phone }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Justified Tabs -->
+    <ul ngbNav #justifiednav="ngbNav" [activeId]="activeIdTab" class="nav-pills nav-justified"
+      (navChange)="onChangeNav($event)">
+      <li *ngFor="let tab of tabStudent ; let i = index" [ngbNavItem]="tab.id">
+        <a ngbNavLink class="pt-2 pb-2 m-1" [ngbTooltip]="tab.name | translate">
+          <span class="d-block d-sm-none"><i [ngClass]="tab.icon"></i></span>
+          <span class="d-none d-sm-block font-size-15 text-uppercase text-overflow">{{ tab.name |
+            translate }}</span>
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template *ngTemplateOutlet="linkTemplate; context: { template: tab.template }">
+          </ng-template>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="justifiednav"></div>
+  </div>
+  <!-- End Justified Tabs -->
+</div>
+<!-- Tab Content -->
+<ng-template #linkTemplate let-template="template">
+  <app-student-tab-detail *ngIf="template === 'detail'" [accountId]="userId">
+  </app-student-tab-detail>
+  <app-student-tab-study-process *ngIf="template === 'study-process'" [accountId]="userId">
+  </app-student-tab-study-process>
+  <app-student-tab-classification *ngIf="template === 'classification'" [accountId]="userId">
+  </app-student-tab-classification>
+</ng-template>

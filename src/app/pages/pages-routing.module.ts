@@ -27,4 +27,16 @@ export const pagesRoutes: Routes = [
       },
     },
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./main/student/student.module').then((m) => m.StudentModule),
+    canActivate: [AuthGuard],
+    data: {
+      permissions: {
+        only: SystemConstant.PERMISSIONS.F_MEMBER,
+        redirectTo: UrlConstant.ROUTE.MAIN.PAGE_404,
+      },
+    },
+  },
 ];

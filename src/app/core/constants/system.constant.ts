@@ -1,4 +1,5 @@
 export class SystemConstant {
+  public static ACCOUNT_TYPE = 'ACCOUNT_TYPE';
   public static ACCESS_TOKEN = 'ACCESS_TOKEN';
   public static REFRESH_TOKEN = 'REFRESH_TOKEN';
   public static USER_PROFILE = 'USER_PROFILE';
@@ -188,6 +189,11 @@ export class SystemConstant {
     DELETE: 'DELETE',
   };
 
+  public static ACCOUNT_STATUS = {
+    STUDYING: 'Đang học',
+    WORKING: 'Đang làm việc',
+    GRADUATED: 'Đã tốt nghiệp',
+  }
   /**
    * F: Full permission (CRUD)
    * G: Method Get

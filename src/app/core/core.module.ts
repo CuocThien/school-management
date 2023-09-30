@@ -7,12 +7,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/common/auth.service';
 import { EventService } from './services/common/event.service';
 import { LanguageService } from './services/common/language.service';
+import { AccountTypeGuard } from './guards/account-type.guard';
 
 @NgModule({
   declarations: [],
   providers: [
     AuthenticationService,
     AuthGuard,
+    AccountTypeGuard,
     NgxPermissionsGuard,
     LanguageService,
     EventService,
@@ -29,4 +31,4 @@ import { LanguageService } from './services/common/language.service';
   ],
   exports: [HttpClientModule, ToastrModule],
 })
-export class CoreModule {}
+export class CoreModule { }

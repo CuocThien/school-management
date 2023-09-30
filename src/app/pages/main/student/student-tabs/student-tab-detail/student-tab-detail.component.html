@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="card overflow-hidden">
+          <h4 class="m-0 pt-3 ps-3 card-border-title">Thông tin học sinh</h4>
+          <div class="card-body pt-0">
+            <ul class="list-unstyled mb-0 font-w500">
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.FULL_NAME' | translate }}:</p>
+                <span>{{studentInfo?.fullName || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.BIRTH_DATE' | translate }}:</p>
+                <span>{{studentInfo?.birthday | date: dayFormat || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.BIRTHPLACE' | translate }}:</p>
+                <span>{{studentInfo?.birthplace || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.GENDER' | translate }}: </p>
+                <span>{{ studentInfo?.gender || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.RELIGION' | translate }}: </p>
+                <span>{{ studentInfo?.religion || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.ADDRESS' | translate }}: </p>
+                <span>{{ studentInfo?.address || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.IDENTITY_NUMBER' | translate }}: </p>
+                <span>{{ studentInfo?.identityNumber || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.PHONE' | translate }}: </p>
+                <span>{{ studentInfo?.phone || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.EMAIL' | translate }}: </p>
+                <span>{{ studentInfo?.email || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.JOIN_CYU_AT' | translate }}:</p>
+                <span>{{studentInfo?.joinCYUAt | date: dayFormat || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.JOIN_CP_AT' | translate }}:</p>
+                <span>{{studentInfo?.joinCPAt | date: dayFormat || '-'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="card overflow-hidden">
+          <h4 class="m-0 pt-3 ps-3 card-border-title">Thông tin phụ huynh</h4>
+          <div class="card-body pt-0">
+            <ul class="list-unstyled mb-0 font-w500">
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.FULL_NAME' | translate }}:</p>
+                <span>{{parentInfo?.fullName || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.BIRTH_DATE' | translate }}:</p>
+                <span>{{parentInfo?.birthday | date: dayFormat || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.ADDRESS' | translate }}: </p>
+                <span>{{ parentInfo?.address || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.IDENTITY_NUMBER' | translate }}: </p>
+                <span>{{ parentInfo?.identityNumber || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.PHONE' | translate }}: </p>
+                <span>{{ parentInfo?.phone || '-'}}</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center card-border-1x mt-3 mb-3">
+                <p class="mb-0">{{ 'USER_INFO.EMAIL' | translate }}: </p>
+                <span>{{ parentInfo?.email || '-'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
