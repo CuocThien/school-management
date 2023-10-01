@@ -1,0 +1,152 @@
+<div class="card">
+  <div class="card-body h-vh100">
+    <h4 class="card-title text-uppercase card-border-title">{{ 'DATA.CLUB_MEMBER.TITLE' | translate }}
+    </h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="row mb-3 mt-2">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedSemester" (ngModelChange)="onChangeSemester()"
+              [placeholder]="'SELECTBOX.SEMESTER' | translate">
+              <ng-option *ngFor="let semester of listSemester" [value]="semester.id">
+                {{ semester.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedGrade" (ngModelChange)="onChangeGrade()"
+              [placeholder]="'SELECTBOX.GRADE' | translate">
+              <ng-option *ngFor="let grade of listGrade" [value]="grade.id">
+                {{ grade.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedSubject" (ngModelChange)="onChangeSubject()"
+              [placeholder]="'SELECTBOX.SUBJECT' | translate">
+              <ng-option *ngFor="let subject of listSubject" [value]="subject.id">
+                {{ subject.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedClass" (ngModelChange)="onChangeClass()"
+              [placeholder]="'SELECTBOX.CLASS' | translate">
+              <ng-option *ngFor="let class of listClass" [value]="class.id">
+                {{ class.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="col-12 h-vh100">
+        <div class="table-responsive">
+          <form [formGroup]="form">
+            <table
+              class="table table-striped table table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline">
+              <thead>
+                <tr class="text-center text-overflow text-uppercase font-size-15">
+                  <th scope="col">{{ 'TABLE.FULL_NAME' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.MINI_TEST_1_SCORE' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.MINI_TEST_2_SCORE' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.MINI_TEST_3_SCORE' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.MIDTERM_TEST_SCORE' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.ENDTERM_TEST_SCORE' | translate }}</th>
+                  <th scope="col">{{ 'TABLE.AVERAGE_SCORE' | translate }}</th>
+                  <th scope="col">Nhận xét</th>
+                  <th scope="col">{{ 'TABLE.MANAGE' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of listScore; let i = index">
+                  <tr class="align-middle h6 h-80 font-size-14">
+                    <td class="text-center ">{{ item.fullName }}</td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.miniTest1Score || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="number" class="form-control"
+                        formControlName="miniTest1Score" [placeholder]="'PLACEHOLDER.MINI_TEST_1_SCORE' | translate">
+                    </td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.miniTest2Score || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="number" class="form-control"
+                        formControlName="miniTest2Score" [placeholder]="'PLACEHOLDER.MINI_TEST_2_SCORE' | translate">
+                    </td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.miniTest3Score || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="number" class="form-control"
+                        formControlName="miniTest3Score" [placeholder]="'PLACEHOLDER.MINI_TEST_3_SCORE' | translate">
+                    </td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.midtermTestScore || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="number" class="form-control"
+                        formControlName="midtermTestScore" [placeholder]="'PLACEHOLDER.MIDTERM_TEST_SCORE' | translate">
+                    </td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.endtermTestScore || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="number" class="form-control"
+                        formControlName="endtermTestScore" [placeholder]="'PLACEHOLDER.ENDTERM_TEST_SCORE' | translate">
+                    </td>
+                    <td class="text-center ">
+                      {{ item?.averageScore || '-'}}
+                    </td>
+                    <td class="text-center ">
+                      <span *ngIf="!item.isEnableEdit">{{ item.review || '-' }}</span>
+                      <input *ngIf="item.isEnableEdit" type="text" class="form-control" formControlName="review"
+                        placeholder="Nhận xét">
+                    </td>
+                    <td class="text-center">
+                      <!-- btn-check -->
+                      <button *ngIf="item.isEnableEdit" type="button"
+                        class="btn btn-success btn-sm btn-only-shadow me-1" [ngbTooltip]="'BUTTON.SUBMIT'|translate"
+                        (click)="submitEditInline(item.id)">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <!-- btn-cancel -->
+                      <button *ngIf="item.isEnableEdit" type="button" class="btn btn-danger btn-sm btn-only-shadow me-1"
+                        [ngbTooltip]="'BUTTON.CANCEL'|translate" (click)="cancel(i)">
+                        <i class="fas fa-close"></i>
+                      </button>
+                      <!-- btn-danger -->
+                      <button *ngIf="!item.isEnableEdit" type="button" class="btn btn-info btn-sm btn-only-shadow me-1"
+                        [ngbTooltip]="'BUTTON.INPUT_SCORE'|translate" (click)="enableEdit(i)">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <!-- btn-danger -->
+                      <button *ngIf="!item.isEnableEdit && item.isEnableCalAvgScore" type="button"
+                        class="btn btn-success btn-sm btn-only-shadow" [ngbTooltip]="'BUTTON.CAL_AVG' | translate"
+                        (click)="calAverageScore(item)">
+                        <i class="fas fa-calculator"></i></button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </form>
+        </div>
+        <div class=" text-center pagination-footer flex-wrap pagination-rounded">
+          <div class="paging-limit mt-3">
+            <ng-select [clearable]="false" [(ngModel)]="pageSize" (change)="onChangeLimit()">
+              <ng-option [value]="10">10</ng-option>
+              <ng-option [value]="20">20</ng-option>
+              <ng-option [value]="50">50</ng-option>
+            </ng-select>
+          </div>
+          <div class="paging-nav h6">
+            <ngb-pagination class="mb-0 font-size-12" [maxSize]="4" [rotate]="true" [ellipses]="false"
+              [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" [collectionSize]="total"
+              (pageChange)="loadNext($event)">
+              <ng-template ngbPaginationPrevious>{{ 'BUTTON.PREV' | translate }}</ng-template>
+              <ng-template ngbPaginationNext>{{ 'BUTTON.NEXT' | translate }}</ng-template>
+            </ngb-pagination>
+          </div>
+          <div class="paging-total mt-3">
+            <span class="h6 fw-bold">{{ total || 0 }}</span> {{ 'PAGING.ITEM_IN' | translate }} <span
+              class="h6 fw-bold">{{
+              pages || 0 }}</span> {{ 'PAGING.PAGES' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

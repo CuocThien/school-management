@@ -19,4 +19,9 @@ export class ClassService {
     return this.http.get<[]>(this.API_URL + '/classes?' + options);
   }
 
+  public getClassesByType(options: any): Observable<any> {
+    options = querystring.stringify(options);
+    return this.http.get<[]>(this.API_URL + '/classes-by-type?' + options);
+  }
+
 }

@@ -144,7 +144,9 @@
     "SERVICE_STATUS": "Chọn trạng thái đơn hàng...",
     "DELIVERY_METHOD": "Chọn phương thức vận chuyển ...",
     "GRADE": "Chọn khối...",
-    "GENDER": "Chọn giới tính..."
+    "GENDER": "Chọn giới tính...",
+    "SEMESTER": "Chọn học kỳ...",
+    "SUBJECT": "Chọn môn học..."
   },
   "PLACEHOLDER": {
     "INPUT_SESSION_NUMBER": "Nhập số buổi tập",
@@ -204,7 +206,12 @@
     "COUPON_NAME_EN": "Nhập tên khuyến mãi tiếng Anh",
     "COUPON_NAME_VI": "Nhập tên khuyến mãi tiếng Việt",
     "TITLE": "Nhập tiêu đề...",
-    "CONTENT": "Nhập nội dung..."
+    "CONTENT": "Nhập nội dung...",
+    "MINI_TEST_1_SCORE": "Nhập điểm",
+    "MINI_TEST_2_SCORE": "Nhập điểm",
+    "MINI_TEST_3_SCORE": "Nhập điểm",
+    "MIDTERM_TEST_SCORE": "Nhập điểm",
+    "ENDTERM_TEST_SCORE": "Nhập điểm"
   },
   "DATA": {
     "DASHBOARDS": {
@@ -657,7 +664,13 @@
     "COUPON_NAME_EN": "Tên khuyến mãi tiếng Anh",
     "COUPON_NAME_VI": "Tên khuyến mãi tiếng Việt",
     "TARGET_TYPE": "Gửi thông báo đến",
-    "FORM_TEACHER": "GVCN"
+    "FORM_TEACHER": "GVCN",
+    "MINI_TEST_1_SCORE": "ĐĐG TX(1)",
+    "MINI_TEST_2_SCORE": "ĐĐG TX(2)",
+    "MINI_TEST_3_SCORE": "ĐĐG TX(3)",
+    "MIDTERM_TEST_SCORE": "ĐĐG GK",
+    "ENDTERM_TEST_SCORE": "ĐĐG CK",
+    "AVERAGE_SCORE": "Điểm TB"
   },
   "GENDER": {
     "MALE": "Nam",
@@ -786,7 +799,9 @@
     "BAN_ACCOUNT": "Khóa tài khoản",
     "OPEN_ACCOUNT": "Mở tài khoản",
     "LAUNDRY_PACKAGE": "Gói giặt/sấy",
-    "ADD_ORDER": "Thêm đơn hàng"
+    "ADD_ORDER": "Thêm đơn hàng",
+    "INPUT_SCORE": "Nhập điểm",
+    "CAL_AVG": "Tính điểm trung bình"
   },
   "FORM": {
     "SEND_INBODY_TARGET_PROMOTION": "Gửi Inbody Target Promotion",

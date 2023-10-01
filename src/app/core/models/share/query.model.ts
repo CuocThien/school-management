@@ -62,4 +62,6 @@ export class Query {
   laundryPackageId?: string;
   gradeId?: number;
   gender?: number;
+  semesterId?: number;
+  subjectId?: number;
 }

@@ -26,7 +26,7 @@ export const MENU: MenuItem[] = [
       },
       {
         label: 'Đánh Giá Môn Học',
-        link: '/',
+        link: '/subject-assessment',
         permission: ['F_MEMBER'],
       },
       {

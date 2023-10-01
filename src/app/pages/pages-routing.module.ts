@@ -39,4 +39,16 @@ export const pagesRoutes: Routes = [
       },
     },
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./main/subject-assessment/subject-assessment.module').then((m) => m.SubjectAssessmentModule),
+    canActivate: [AuthGuard],
+    data: {
+      permissions: {
+        only: SystemConstant.PERMISSIONS.F_MEMBER,
+        redirectTo: UrlConstant.ROUTE.MAIN.PAGE_404,
+      },
+    },
+  },
 ];

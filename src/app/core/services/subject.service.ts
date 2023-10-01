@@ -7,21 +7,21 @@ import { environment } from 'src/environments/environment.local';
 @Injectable({
   providedIn: 'root'
 })
-export class GradeService {
+export class SubjectService {
 
   private API_URL = environment.API_URL;
   constructor(
     private http: HttpClient,
   ) { }
 
-  public getGrades(options: any): Observable<any> {
+  public getSubjects(options: any): Observable<any> {
     options = querystring.stringify(options);
-    return this.http.get<[]>(this.API_URL + '/grades?' + options);
+    return this.http.get<[]>(this.API_URL + '/subjects?' + options);
   }
 
-  public getGradesByType(options: any): Observable<any> {
+  public getAllSubjects(options: any): Observable<any> {
     options = querystring.stringify(options);
-    return this.http.get<[]>(this.API_URL + '/grades-by-type?' + options);
+    return this.http.get<[]>(this.API_URL + '/all-subjects?' + options);
   }
 
 }
