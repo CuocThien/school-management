@@ -153,6 +153,7 @@ export class StudentProfileComponent implements OnInit {
 
   public onChangeGrade() {
     this.selectedClass = null;
+    this.listStudent = [];
     this._getClasses();
   }
 
@@ -165,7 +166,10 @@ export class StudentProfileComponent implements OnInit {
   }
 
   public getListStudent(options?: Query) {
-    if (this.isAdmin && !this.selectedClass) return;
+    if (this.isAdmin && !this.selectedClass) {
+      this.listStudent = [];
+      return;
+    }
     this.spinner.show();
     options = {
       queryString: this.searchValue,

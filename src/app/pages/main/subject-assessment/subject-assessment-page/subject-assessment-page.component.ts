@@ -59,10 +59,15 @@ export class SubjectAssessmentPageComponent implements OnInit {
     private scoreSvc: ScoreService,
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this._createForm();
     this._getAllData();
   }
+
+  ngAfterViewInit() {
+    this._getGradesByType();
+  }
+
   private _createForm() {
     this.form = this.fb.group({
       miniTest1Score: [null],
@@ -118,6 +123,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
 
   private _getGradesByType(options?: Query) {
     this.spinner.show();
+    this.listScore = [];
     options = {
       semesterId: this.selectedSemester,
       yearId: this.selectedYear,
@@ -250,6 +256,8 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.selectedClass = null;
     this.selectedGrade = null;
     this.selectedSubject = null;
+    this.isOpenSubject = false;
+    this.isOpenClass = false;
     if (!isNil(this.selectedSemester)) {
       this._getGradesByType();
     }
@@ -260,6 +268,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.selectedSubject = null;
     this.listClass = [];
     this.listSubject = [];
+    this.listScore = [];
     if (!isNil(this.selectedGrade)) {
       this.isOpenSubject = true;
       this._getSubjects();
@@ -287,7 +296,10 @@ export class SubjectAssessmentPageComponent implements OnInit {
   }
 
   public getListScores(options?: Query) {
-    if (!this.selectedClass || !this.selectedSubject) return;
+    if (!this.selectedClass || !this.selectedSubject) {
+      this.listScore = [];
+      return;
+    }
     this.spinner.show();
     options = {
       // queryString: this.searchValue,
