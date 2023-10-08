@@ -63,5 +63,6 @@ export class Query {
   gradeId?: number;
   gender?: number;
   semesterId?: number;
+  yearId?: number;
   subjectId?: number;
 }

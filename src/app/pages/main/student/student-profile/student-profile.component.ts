@@ -4,10 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SystemConstant } from 'src/app/core/constants/system.constant';
 import { UrlConstant } from 'src/app/core/constants/url.constant';
-import { Store } from 'src/app/core/models/share/store.model';
 import { Query } from 'src/app/core/models/share/query.model';
 import { AuthenticationService } from 'src/app/core/services/common/auth.service';
-import { ClassService, GradeService, StudentService } from 'src/app/core/services';
+import { ClassService, GradeService, SemesterService, StudentService, YearService } from 'src/app/core/services';
 import { omitBy, isNil } from 'lodash';
 import { getPage } from 'src/app/core/utils';
 @Component({
@@ -18,6 +17,8 @@ import { getPage } from 'src/app/core/utils';
 export class StudentProfileComponent implements OnInit {
   // NEW
   listStudent = [];
+  listYear = [];
+  listSemester = [];
   listGrade = [];
   listClass = [];
   listGender = [
@@ -31,9 +32,11 @@ export class StudentProfileComponent implements OnInit {
     }
   ]
 
-  isVisible = false;
-
+  isAdmin = false;
+  isOpenClass = false;
   // Filter
+  selectedYear?: number;
+  selectedSemester?: number;
   selectedGrade?: number;
   selectedClass?: number;
   selectedGender?: number;
@@ -53,6 +56,8 @@ export class StudentProfileComponent implements OnInit {
     public translate: TranslateService,
     private router: Router,
     private authSvc: AuthenticationService,
+    private yearSvc: YearService,
+    private semesterSvc: SemesterService,
     private gradeSvc: GradeService,
     private classSvc: ClassService,
     private studentSvc: StudentService,
@@ -64,12 +69,36 @@ export class StudentProfileComponent implements OnInit {
 
   private _getAllData() {
     const accType = this.authSvc.getAccountType();
+    this._getYears();
+    this._getSemesters();
     if (accType == 'ADMIN') {
-      this.isVisible = true;
+      this.isAdmin = true;
       this._getGrades();
       this._getClasses();
     }
-    this.getListStudent();
+  }
+
+  private _getYears() {
+    this.spinner.show();
+    this.yearSvc.getYears({}).subscribe((res: any) => {
+      this.listYear = res.data.result;
+      res.data.result.map(item => {
+        if (item.isActive) return this.selectedYear = item.id;
+      });
+      this.spinner.hide();
+    }, () => this.spinner.hide());
+  }
+
+  private _getSemesters() {
+    this.spinner.show();
+    this.semesterSvc.getSemesters({}).subscribe((res: any) => {
+      this.listSemester = res.data.result;
+      res.data.result.map(item => {
+        if (item.isActive) return this.selectedSemester = item.id;
+      });
+      this.getListStudent();
+      this.spinner.hide();
+    }, () => this.spinner.hide());
   }
 
   private _getGrades() {
@@ -112,10 +141,19 @@ export class StudentProfileComponent implements OnInit {
     this.getListStudent();
   }
 
+  public onChangeYear() {
+    this.selectedClass = null;
+    this.getListStudent();
+  }
+
+  public onChangeSemester() {
+    this.selectedClass = null;
+    this.getListStudent();
+  }
+
   public onChangeGrade() {
     this.selectedClass = null;
     this._getClasses();
-    this.getListStudent();
   }
 
   public onChangeClass() {
@@ -127,10 +165,12 @@ export class StudentProfileComponent implements OnInit {
   }
 
   public getListStudent(options?: Query) {
+    if (this.isAdmin && !this.selectedClass) return;
     this.spinner.show();
     options = {
       queryString: this.searchValue,
-      gradeId: this.selectedGrade,
+      yearId: this.selectedYear,
+      semesterId: this.selectedSemester,
       classId: this.selectedClass,
       gender: this.selectedGender,
       page: this.page,

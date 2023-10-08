@@ -6,15 +6,30 @@
       <div class="col-12">
         <div class="row mb-3 mt-2">
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-            <div class="input-group form-search mb-2">
-              <input class="form-control form-search-input" [placeholder]="'HEADER.SEARCH' | translate"
-                [(ngModel)]="searchValue" (keyup.enter)="onSearch()" />
-              <div>
-                <div class="btn-search-primary" (click)="onSearch()"><i class="fas fa-search"></i></div>
-              </div>
-            </div>
+            <ng-select class="mb-2" [(ngModel)]="selectedYear" (ngModelChange)="onChangeYear()"
+              [placeholder]="'SELECTBOX.YEAR' | translate">
+              <ng-option *ngFor="let year of listYear" [value]="year.id">
+                {{ year.name }}
+              </ng-option>
+            </ng-select>
           </div>
-          <div *ngIf="isVisible" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedSemester" (ngModelChange)="onChangeSemester()"
+              [placeholder]="'SELECTBOX.SEMESTER' | translate">
+              <ng-option *ngFor="let semester of listSemester" [value]="semester.id">
+                {{ semester.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div *ngIf="isAdmin" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedGrade" (ngModelChange)="onChangeGrade()"
+              [placeholder]="'SELECTBOX.GRADE' | translate">
+              <ng-option *ngFor="let grade of listGrade" [value]="grade.id">
+                {{ grade.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div *ngIf="isAdmin" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <ng-select class="mb-2" [(ngModel)]="selectedClass" (ngModelChange)="onChangeClass()"
               [placeholder]="'SELECTBOX.CLASS' | translate">
               <ng-option *ngFor="let class of listClass" [value]="class.id">
@@ -22,13 +37,16 @@
               </ng-option>
             </ng-select>
           </div>
-          <div *ngIf="isVisible" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-            <ng-select class="mb-2" [(ngModel)]="selectedGrade" (ngModelChange)="onChangeGrade()"
-              [placeholder]="'SELECTBOX.GRADE' | translate">
-              <ng-option *ngFor="let grade of listGrade" [value]="grade.id">
-                {{ grade.name }}
-              </ng-option>
-            </ng-select>
+        </div>
+        <div class="row mb-3 mt-2">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <div class="input-group form-search mb-2">
+              <input class="form-control form-search-input" [placeholder]="'HEADER.SEARCH' | translate"
+                [(ngModel)]="searchValue" (keyup.enter)="onSearch()" />
+              <div>
+                <div class="btn-search-primary" (click)="onSearch()"><i class="fas fa-search"></i></div>
+              </div>
+            </div>
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <ng-select class="mb-2" [(ngModel)]="selectedGender" (ngModelChange)="onChangeGender()"

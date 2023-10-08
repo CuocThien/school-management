@@ -83,7 +83,7 @@ export class AuthenticationService {
   }
 
   public checkPermissions(permissions: string[]): boolean {
-    const auth: UserProfile = this.getUserProfileLocal();
+    const auth = this.getUserProfileLocal();
     return auth.permissions.some(item => permissions.includes(item));
   }
 

@@ -17,34 +17,34 @@ export const MENU: MenuItem[] = [
     label: 'Học Sinh',
     icon: 'bx bxs-graduation',
     link: '',
-    permission: ['F_MEMBER'],
+    permission: ['ADMIN', 'FORM_TEACHER', 'TEACHER'],
     subItems: [
       {
         label: 'Hồ Sơ Học Sinh',
         link: '/students',
-        permission: ['F_MEMBER'],
+        permission: ['FORM_TEACHER', 'ADMIN'],
       },
       {
         label: 'Đánh Giá Môn Học',
         link: '/subject-assessment',
-        permission: ['F_MEMBER'],
+        permission: ['ADMIN', 'TEACHER', 'FORM_TEACHER'],
       },
       {
         label: 'Xếp Loại Hạnh Kiểm',
         link: '/',
-        permission: ['G_LISTCHANGES']
+        permission: ['ADMIN', 'FORM_TEACHER']
       }
     ],
   },
   {
     label: 'Giáo Viên',
     icon: 'bx bxs-group',
-    link: '/staff',
+    link: '/',
     permission: ['F_STAFF'],
     subItems: [
       {
         label: 'Cơ Cấu Tổ Chức',
-        link: '/staff/list-staff',
+        link: '/',
         permission: ['F_STAFF'],
       },
     ],

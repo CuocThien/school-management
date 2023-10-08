@@ -5,8 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SystemConstant } from 'src/app/core/constants/system.constant';
 import { UrlConstant } from 'src/app/core/constants/url.constant';
 import { Query } from 'src/app/core/models/share/query.model';
-import { ClassService, GradeService, ScoreService, SemesterService, SubjectService } from 'src/app/core/services';
-import { omitBy, isNil, mean } from 'lodash';
+import { ClassService, GradeService, ScoreService, SemesterService, SubjectService, YearService } from 'src/app/core/services';
+import { omitBy, isNil, mean, size } from 'lodash';
 import { getPage } from 'src/app/core/utils';
 import { FormBuilder, FormGroup, } from '@angular/forms';
 @Component({
@@ -17,11 +17,16 @@ import { FormBuilder, FormGroup, } from '@angular/forms';
 export class SubjectAssessmentPageComponent implements OnInit {
   form: FormGroup;
   currentEditIndex?: number;
+
+  isOpenSubject = false;
+  isOpenClass = false;
+
   // NEW
   listScore = [];
   listSubject = [];
   listClass = [];
   listSemester = [];
+  listYear = [];
   listGrade = [];
 
   // Filter
@@ -29,6 +34,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
   selectedClass?: number;
   selectedGrade?: number;
   selectedSemester?: number;
+  selectedYear?: number;
   // Pagination
   total: number;
   pages: number;
@@ -44,6 +50,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public translate: TranslateService,
     private router: Router,
+    private yearSvc: YearService,
     private semesterSvc: SemesterService,
     private subjectSvc: SubjectService,
     private classSvc: ClassService,
@@ -79,16 +86,32 @@ export class SubjectAssessmentPageComponent implements OnInit {
   }
 
   private _getAllData() {
+    this._getYears();
     this._getSemesters();
     // this._getGradesByType();
     // this._getSubjects();
     // this._getClassesByType();
   }
 
+  private _getYears() {
+    this.spinner.show();
+    this.yearSvc.getYears({}).subscribe((res: any) => {
+      this.listYear = res.data.result;
+      res.data.result.map(item => {
+        if (item.isActive) return this.selectedYear = item.id;
+      });
+      this.spinner.hide();
+    }, () => this.spinner.hide());
+  }
+
   private _getSemesters() {
     this.spinner.show();
     this.semesterSvc.getSemesters({}).subscribe((res: any) => {
       this.listSemester = res.data.result;
+      res.data.result.map(item => {
+        if (item.isActive) return this.selectedSemester = item.id;
+      });
+      this._getGradesByType();
       this.spinner.hide();
     }, () => this.spinner.hide());
   }
@@ -97,6 +120,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.spinner.show();
     options = {
       semesterId: this.selectedSemester,
+      yearId: this.selectedYear,
     };
     this.gradeSvc.getGradesByType(omitBy(options, isNil)).subscribe((res: any) => {
       this.listGrade = res.data.result;
@@ -108,7 +132,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.spinner.show();
     options = {
       semesterId: this.selectedSemester,
-      classId: this.selectedClass,
+      yearId: this.selectedYear,
       gradeId: this.selectedGrade,
     };
     this.subjectSvc.getSubjects(omitBy(options, isNil)).subscribe((res: any) => {
@@ -120,6 +144,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
   private _getClassesByType(options?: Query) {
     this.spinner.show();
     options = {
+      yearId: this.selectedYear,
       semesterId: this.selectedSemester,
       gradeId: this.selectedGrade,
       subjectId: this.selectedSubject
@@ -132,16 +157,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
 
   private _updateScore(scoreId: string, body: any) {
     this.spinner.show();
-    this.scoreSvc.updateScore(scoreId, omitBy(body, isNil)).subscribe(
-      () => {
-        this.getListScores();
-        this.spinner.hide();
-      }, () => this.spinner.hide());
-  }
-
-  private _calAvgScore(body: any) {
-    this.spinner.show();
-    this.scoreSvc.calScoreAverage(body).subscribe(
+    this.scoreSvc.updateScore(scoreId, body).subscribe(
       () => {
         this.getListScores();
         this.spinner.hide();
@@ -165,11 +181,24 @@ export class SubjectAssessmentPageComponent implements OnInit {
 
   public submitEditInline(scoreId: string) {
     const body = this.form.value;
+    const score = {
+      miniTest1Score: body.miniTest1Score,
+      miniTest2Score: body.miniTest2Score,
+      miniTest3Score: body.miniTest3Score,
+      midtermTestScore: body.midtermTestScore,
+      endtermTestScore: body.endtermTestScore,
+    };
+    const isEnableCalAvgScore = size(Object.keys(omitBy(score, isNil))) === 5;
+    if (isEnableCalAvgScore) {
+      const averageScore = this._calAverageScore(body);
+      Object.assign(body, { averageScore });
+    } else {
+      Object.assign(body, { averageScore: null });
+    }
     this._updateScore(scoreId, body);
   }
 
-  public calAverageScore(value: any) {
-    const { classSubjectId, studentId } = value;
+  private _calAverageScore(value: any) {
     const {
       miniTest1Score,
       miniTest2Score,
@@ -187,13 +216,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
       endtermTestScore,
       endtermTestScore,
     ].map(item => Number(item));
-    const score = mean(arrScore);
-    const body = {
-      classSubjectId,
-      studentId,
-      score
-    };
-    this._calAvgScore(body);
+    return mean(arrScore);
   }
 
   public cancel(index: number) {
@@ -214,13 +237,21 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.getListScores();
   }
 
+  public onChangeYear() {
+    this.selectedClass = null;
+    this.selectedGrade = null;
+    this.selectedSubject = null;
+    if (!isNil(this.selectedYear)) {
+      this._getGradesByType();
+    }
+  }
+
   public onChangeSemester() {
     this.selectedClass = null;
     this.selectedGrade = null;
     this.selectedSubject = null;
     if (!isNil(this.selectedSemester)) {
       this._getGradesByType();
-      this._getSubjects();
     }
   }
 
@@ -230,7 +261,11 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.listClass = [];
     this.listSubject = [];
     if (!isNil(this.selectedGrade)) {
+      this.isOpenSubject = true;
       this._getSubjects();
+    } else {
+      this.isOpenSubject = false;
+      this.isOpenClass = false;
     }
   }
 
@@ -245,6 +280,9 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.listClass = [];
     if (!isNil(this.selectedSubject)) {
       this._getClassesByType();
+      this.isOpenClass = true;
+    } else {
+      this.isOpenClass = false;
     }
   }
 
@@ -253,6 +291,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this.spinner.show();
     options = {
       // queryString: this.searchValue,
+      yearId: this.selectedYear,
       semesterId: this.selectedSemester,
       page: this.page,
       limit: this.pageSize,

@@ -6,6 +6,14 @@
       <div class="col-12">
         <div class="row mb-3 mt-2">
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+            <ng-select class="mb-2" [(ngModel)]="selectedYear" (ngModelChange)="onChangeYear()"
+              [placeholder]="'SELECTBOX.YEAR' | translate">
+              <ng-option *ngFor="let year of listYear" [value]="year.id">
+                {{ year.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <ng-select class="mb-2" [(ngModel)]="selectedSemester" (ngModelChange)="onChangeSemester()"
               [placeholder]="'SELECTBOX.SEMESTER' | translate">
               <ng-option *ngFor="let semester of listSemester" [value]="semester.id">
@@ -21,7 +29,7 @@
               </ng-option>
             </ng-select>
           </div>
-          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+          <div *ngIf="isOpenSubject" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <ng-select class="mb-2" [(ngModel)]="selectedSubject" (ngModelChange)="onChangeSubject()"
               [placeholder]="'SELECTBOX.SUBJECT' | translate">
               <ng-option *ngFor="let subject of listSubject" [value]="subject.id">
@@ -29,7 +37,7 @@
               </ng-option>
             </ng-select>
           </div>
-          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+          <div *ngIf="isOpenClass" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <ng-select class="mb-2" [(ngModel)]="selectedClass" (ngModelChange)="onChangeClass()"
               [placeholder]="'SELECTBOX.CLASS' | translate">
               <ng-option *ngFor="let class of listClass" [value]="class.id">
@@ -113,10 +121,10 @@
                         <i class="fas fa-edit"></i>
                       </button>
                       <!-- btn-danger -->
-                      <button *ngIf="!item.isEnableEdit && item.isEnableCalAvgScore" type="button"
+                      <!-- <button *ngIf="!item.isEnableEdit && item.isEnableCalAvgScore" type="button"
                         class="btn btn-success btn-sm btn-only-shadow" [ngbTooltip]="'BUTTON.CAL_AVG' | translate"
                         (click)="calAverageScore(item)">
-                        <i class="fas fa-calculator"></i></button>
+                        <i class="fas fa-calculator"></i></button> -->
                     </td>
                   </tr>
                 </ng-container>
