@@ -81,7 +81,7 @@ export class StudentInfoDetailComponent implements OnInit {
   }
 
   public onChangeNav(event) {
-    onChangeNavTab(event, this.tabStudent, this.studentInfo, this.location, 'MEMBER');
+    onChangeNavTab(event, this.tabStudent, this.studentInfo, this.location, 'STUDENT');
     /** nextId === 1 is tab information */
     if (event.nextId === 1) {
       this._getAllUserInfo();

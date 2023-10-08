@@ -23,8 +23,13 @@ export class ScoreService {
     return this.http.put<[]>(this.API_URL + `/score/${id}`, body);
   }
 
-  public calScoreAverage(body: any): Observable<any> {
-    return this.http.post<[]>(this.API_URL + '/score-average', body);
+  public getStudyProcess(studentId: string, options: any): Observable<any> {
+    options = querystring.stringify(options);
+    return this.http.get<[]>(this.API_URL + `/study-process/${studentId}?` + options);
+  }
+
+  public getScoreFinal(studentId: string): Observable<any> {
+    return this.http.get<[]>(this.API_URL + `/score-final/${studentId}`);
   }
 
 }

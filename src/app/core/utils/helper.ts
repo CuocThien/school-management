@@ -182,6 +182,7 @@ const onChangeNavTab =
     const objTabMenu = keyBy(tabMenu, 'id');
     const itemMenu = objTabMenu[event.nextId];
     const typeAccout = {
+      STUDENT: UrlConstant.ROUTE.MAIN.STUDENT,
       MEMBER: UrlConstant.ROUTE.MAIN.CLUB_MEMBERS,
       PT: UrlConstant.ROUTE.MAIN.EMPLOYEES_LIST_PT,
       GM: UrlConstant.ROUTE.MAIN.EMPLOYEES_LIST_GM,

@@ -64,10 +64,6 @@ export class SubjectAssessmentPageComponent implements OnInit {
     this._getAllData();
   }
 
-  ngAfterViewInit() {
-    this._getGradesByType();
-  }
-
   private _createForm() {
     this.form = this.fb.group({
       miniTest1Score: [null],
@@ -92,7 +88,6 @@ export class SubjectAssessmentPageComponent implements OnInit {
 
   private _getAllData() {
     this._getYears();
-    this._getSemesters();
     // this._getGradesByType();
     // this._getSubjects();
     // this._getClassesByType();
@@ -105,6 +100,7 @@ export class SubjectAssessmentPageComponent implements OnInit {
       res.data.result.map(item => {
         if (item.isActive) return this.selectedYear = item.id;
       });
+      this._getSemesters();
       this.spinner.hide();
     }, () => this.spinner.hide());
   }
@@ -193,6 +189,9 @@ export class SubjectAssessmentPageComponent implements OnInit {
       miniTest3Score: body.miniTest3Score,
       midtermTestScore: body.midtermTestScore,
       endtermTestScore: body.endtermTestScore,
+      classId: this.selectedClass,
+      semesterId: this.selectedSemester,
+      yearId: this.selectedYear
     };
     const isEnableCalAvgScore = size(Object.keys(omitBy(score, isNil))) === 5;
     if (isEnableCalAvgScore) {

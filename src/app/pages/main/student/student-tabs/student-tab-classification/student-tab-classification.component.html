@@ -1,1 +1,30 @@
-<p>student-tab-classification works!</p>
+<div class="card">
+  <div class="card-body h-vh100">
+    <div class="row">
+      <!-- Table -->
+      <div class="col-12 h-vh100">
+        <div class="table-responsive">
+          <table
+            class="table table-striped table table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline">
+            <thead>
+              <tr class="text-center text-overflow text-uppercase font-size-15">
+                <th scope="col">Năm học</th>
+                <th scope="col">Điểm tổng kết</th>
+                <th scope="col">Xếp loại học lực</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of listScore; let i = index">
+                <tr class="align-middle h6 h-80 font-size-14">
+                  <td class="text-center ">{{ item.year }}</td>
+                  <td class="text-center ">{{ item.score }}</td>
+                  <td class="text-center ">{{ item.rank }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

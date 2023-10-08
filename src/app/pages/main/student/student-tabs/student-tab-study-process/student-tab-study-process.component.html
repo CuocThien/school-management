@@ -1,1 +1,63 @@
-<p>student-tab-study-process works!</p>
+<div class="card">
+  <div class="card-body h-vh100">
+    <div class="row">
+      <div class="col-12 row">
+        <div class="row mb-3 mt-2 col-10">
+          <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6 col-12">
+            <ng-select class="mb-2" [clearable]="false" [(ngModel)]="selectedYear" (ngModelChange)="onChangeYear()"
+              [placeholder]="'SELECTBOX.YEAR' | translate">
+              <ng-option *ngFor="let year of listYear" [value]="year.id">
+                {{ year.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6 col-12">
+            <ng-select class="mb-2" [clearable]="false" [(ngModel)]="selectedSemester"
+              (ngModelChange)="onChangeSemester()" [placeholder]="'SELECTBOX.SEMESTER' | translate">
+              <ng-option *ngFor="let semester of listSemester" [value]="semester.id">
+                {{ semester.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-2 m-auto">
+          <h6>Trung bình học kỳ: {{avgScore || '-'}}</h6>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="col-12 h-vh100">
+        <div class="table-responsive">
+          <table
+            class="table table-striped table table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline">
+            <thead>
+              <tr class="text-center text-overflow text-uppercase font-size-15">
+                <th scope="col">Tên môn học</th>
+                <th scope="col">{{ 'TABLE.MINI_TEST_1_SCORE' | translate }}</th>
+                <th scope="col">{{ 'TABLE.MINI_TEST_2_SCORE' | translate }}</th>
+                <th scope="col">{{ 'TABLE.MINI_TEST_3_SCORE' | translate }}</th>
+                <th scope="col">{{ 'TABLE.MIDTERM_TEST_SCORE' | translate }}</th>
+                <th scope="col">{{ 'TABLE.ENDTERM_TEST_SCORE' | translate }}</th>
+                <th scope="col">{{ 'TABLE.AVERAGE_SCORE' | translate }}</th>
+                <th scope="col">Nhận xét</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of listStudyProcess; let i = index">
+                <tr class="align-middle h6 h-80 font-size-14">
+                  <td class="text-center ">{{ item.subjectName }}</td>
+                  <td class="text-center ">{{ item.miniTest1Score }}</td>
+                  <td class="text-center ">{{ item.miniTest2Score }}</td>
+                  <td class="text-center ">{{ item.miniTest3Score }}</td>
+                  <td class="text-center ">{{ item.midtermTestScore }}</td>
+                  <td class="text-center ">{{ item.endtermTestScore }}</td>
+                  <td class="text-center ">{{ item.averageScore }}</td>
+                  <td class="text-center ">{{ item.review }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

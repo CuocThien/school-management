@@ -26,21 +26,46 @@ export const studentRoutes: Routes = [
     path: 'students/:id',
     component: StudentInfoDetailComponent,
     pathMatch: 'full',
+    canActivate: [AccountTypeGuard],
+    data: {
+      permissions: {
+        only: ['FORM_TEACHER', 'ADMIN'],
+        redirectTo: UrlConstant.ROUTE.MAIN.NEWS,
+      },
+    },
   },
   {
     path: 'students/:id/detail',
     component: StudentTabDetailComponent,
-    pathMatch: 'full',
+    canActivate: [AccountTypeGuard],
+    data: {
+      permissions: {
+        only: ['FORM_TEACHER', 'ADMIN'],
+        redirectTo: UrlConstant.ROUTE.MAIN.NEWS,
+      },
+    },
   },
   {
     path: 'students/:id/study-process',
     component: StudentTabStudyProcessComponent,
-    pathMatch: 'full',
+    canActivate: [AccountTypeGuard],
+    data: {
+      permissions: {
+        only: ['FORM_TEACHER', 'ADMIN'],
+        redirectTo: UrlConstant.ROUTE.MAIN.NEWS,
+      },
+    },
   },
   {
     path: 'students/:id/classification',
     component: StudentTabClassificationComponent,
-    pathMatch: 'full',
+    canActivate: [AccountTypeGuard],
+    data: {
+      permissions: {
+        only: ['FORM_TEACHER', 'ADMIN'],
+        redirectTo: UrlConstant.ROUTE.MAIN.NEWS,
+      },
+    },
   },
 
 ];

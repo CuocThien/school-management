@@ -70,7 +70,6 @@ export class StudentProfileComponent implements OnInit {
   private _getAllData() {
     const accType = this.authSvc.getAccountType();
     this._getYears();
-    this._getSemesters();
     if (accType == 'ADMIN') {
       this.isAdmin = true;
       this._getGrades();
@@ -85,6 +84,7 @@ export class StudentProfileComponent implements OnInit {
       res.data.result.map(item => {
         if (item.isActive) return this.selectedYear = item.id;
       });
+      this._getSemesters();
       this.spinner.hide();
     }, () => this.spinner.hide());
   }
