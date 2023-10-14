@@ -29,11 +29,6 @@ export const MENU: MenuItem[] = [
         link: '/subject-assessment',
         permission: ['ADMIN', 'TEACHER', 'FORM_TEACHER'],
       },
-      {
-        label: 'Xếp Loại Hạnh Kiểm',
-        link: '/',
-        permission: ['ADMIN', 'FORM_TEACHER']
-      }
     ],
   },
   {
