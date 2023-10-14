@@ -189,11 +189,13 @@ export class SubjectAssessmentPageComponent implements OnInit {
       miniTest3Score: body.miniTest3Score,
       midtermTestScore: body.midtermTestScore,
       endtermTestScore: body.endtermTestScore,
+    };
+    const isEnableCalAvgScore = size(Object.keys(omitBy(score, isNil))) === 5;
+    Object.assign(body, {
       classId: this.selectedClass,
       semesterId: this.selectedSemester,
       yearId: this.selectedYear
-    };
-    const isEnableCalAvgScore = size(Object.keys(omitBy(score, isNil))) === 5;
+    });
     if (isEnableCalAvgScore) {
       const averageScore = this._calAverageScore(body);
       Object.assign(body, { averageScore });
